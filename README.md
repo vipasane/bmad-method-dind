@@ -4,11 +4,12 @@ Docker-in-Docker development environment for [BMAD-METHOD](https://github.com/bm
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
-- [Quick Start](#quick-start)
+- [Quick Start](#quick-start) ⭐ *Complete setup in 10 minutes*
 - [Container Setup](#container-setup)
 - [Working with the Container](#working-with-the-development-container)
 - [BMAD-Method Installation](#bmad-method-setup)
-- [Additional Tools](#additional-setup)
+- [Claude Code Integration](#additional-setup)
+- [Usage Monitoring & Costs](#usage-monitoring--costs) 💰 *Track your AI usage*
 - [Troubleshooting](#troubleshooting)
 - [Resources](#resources)
 
@@ -31,11 +32,49 @@ Before you begin, ensure you have the following installed on your local machine:
 
 ## Quick Start
 
-**TL;DR**: Get up and running in 5 minutes:
-1. Clone this repo: `git clone https://github.com/vipasane/bmad-method-dind.git`
-2. Open in VS Code and click "Reopen in Container" when prompted
-3. Once container is running, install BMAD-Method: `npx bmad-method install`
-4. Start developing with BMAD methodology!
+**TL;DR**: Get the complete BMAD + Claude Code environment in 10 minutes:
+
+1. **Setup Container**:
+   ```bash
+   git clone https://github.com/vipasane/bmad-method-dind.git
+   cd bmad-method-dind
+   ```
+
+2. **Open in VS Code**: Click "Reopen in Container" when prompted
+
+3. **Install Claude Code**:
+   ```bash
+   npm install -g @anthropic-ai/claude-code@latest
+   claude --dangerously-skip-permissions
+   ```
+   Exit Claude Code after initial setup
+
+4. **Setup GitHub Integration**:
+   ```bash
+   gh auth login
+   claude
+   /install-github-app
+   ```
+   Follow the prompts for authentication
+
+5. **Install BMAD-Method**:
+   ```bash
+   npx bmad-method install
+   ```
+
+6. **Start Development**: 
+   - Use `claude` to enter Claude Code environment
+   - Access BMAD agents with `*help`, `*analyst`, or `#bmad-orchestrator`
+   - Upload BMAD team files from `./dist/teams/team-fullstack.txt` for full integration
+
+7. **Optional - Set up Usage Monitoring**:
+   ```bash
+   # Install monitoring tools (recommended for cost tracking)
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   uv tool install claude-monitor
+   ```
+
+🎉 **You're ready!** You now have a complete AI-powered development environment with BMAD methodology and Claude Code integration.
 
 ## Container Setup
 
@@ -243,6 +282,50 @@ claude /bmad-architect   # Generate architecture using BMAD patterns
 - Use BMAD agents directly through Claude Code slash commands
 - Leverage Claude's context with BMAD's structured methodology
 
+## Usage Monitoring & Costs
+
+Track your Claude Code usage and costs to manage your AI development budget effectively.
+
+### Install UV Package Manager
+
+First, install `uv` - a fast Python package installer:
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+### Install Claude Monitor
+
+Install the [Claude Code Usage Monitor](https://github.com/Maciek-roboblog/Claude-Code-Usage-Monitor) for real-time usage tracking:
+```bash
+uv tool install claude-monitor
+```
+
+### Real-Time Usage Monitoring
+
+Monitor your Claude usage in real-time with your specific plan and timezone:
+```bash
+# For Claude Pro Max plan in Europe/Helsinki timezone
+claude-monitor --plan max20 --timezone Europe/Helsinki
+
+# Adjust plan and timezone as needed:
+# Plans: pro5, max20 (number represents daily message limit)
+# Timezone: Your local timezone (e.g., America/New_York, Asia/Tokyo)
+```
+
+### Daily Usage Reports
+
+Get daily usage summaries using ccusage:
+```bash
+npx ccusage@latest
+```
+
+### Monitoring Best Practices
+
+- **Set up monitoring early**: Install monitoring tools before heavy development sessions
+- **Check usage regularly**: Review daily reports to track consumption patterns
+- **Plan usage accordingly**: Use monitoring data to optimize your development workflow
+- **Consider timezone settings**: Accurate timezone ensures correct daily reset tracking
+
 ## Troubleshooting
 
 ### Container Won't Start
@@ -319,6 +402,38 @@ npm run build
 - **Team files not working**: Re-download latest team files from `/dist/teams/` directory
 - **Slash commands failing**: Verify GitHub integration is properly configured with `/install-github-app`
 
+### Usage Monitoring Issues
+
+#### Claude Monitor Installation Problems
+```bash
+# If uv installation fails, try alternative method
+pip install uv
+uv tool install claude-monitor
+
+# Or install directly with pip
+pip install claude-monitor
+```
+
+#### Monitoring Command Issues
+```bash
+# If claude-monitor command not found, check PATH
+echo $PATH
+which claude-monitor
+
+# Refresh shell after uv installation
+source ~/.bashrc  # or ~/.zshrc
+```
+
+#### Timezone Configuration Problems
+- Use standard timezone format: `Area/City` (e.g., `Europe/Helsinki`, `America/New_York`)
+- List available timezones: `timedatectl list-timezones` (Linux)
+- For Windows WSL: Use Linux timezone format
+
+#### Usage Tracking Not Working
+- Ensure Claude Code is running when using monitoring tools
+- Check if monitoring tools have proper permissions
+- Verify Claude Code authentication is active
+
 ## Resources
 
 ### Development Container
@@ -335,5 +450,10 @@ npm run build
 ### Additional Tools
 - [Claude Code Documentation](https://github.com/anthropics/claude-code-action/blob/main/docs/setup.md)
 - [GitHub CLI Documentation](https://cli.github.com/manual/)
+
+### Usage Monitoring Tools
+- [Claude Code Usage Monitor](https://github.com/Maciek-roboblog/Claude-Code-Usage-Monitor) - Real-time usage tracking
+- [UV Package Manager](https://astral.sh/uv/) - Fast Python package installer
+- [ccusage](https://www.npmjs.com/package/ccusage) - Daily usage reports
 
 
