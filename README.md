@@ -32,7 +32,7 @@ Before you begin, ensure you have the following installed on your local machine:
 
 ## Quick Start
 
-**TL;DR**: Get the complete BMAD + Claude Code environment in 10 minutes:
+**TL;DR**: Get the complete BMAD + Claude Code environment ready in ~15 minutes:
 
 1. **Setup Container**:
    ```bash
@@ -62,12 +62,19 @@ Before you begin, ensure you have the following installed on your local machine:
    npx bmad-method install
    ```
 
-6. **Start Development**: 
+6. **Restart Claude Code** (Important for BMAD integration):
+   ```bash
+   # Exit Claude Code if currently running (Ctrl+C or 'exit')
+   # Then restart to load BMAD integration
+   claude
+   ```
+
+7. **Start Development**: 
    - Use `claude` to enter Claude Code environment
    - Access BMAD agents with `*help`, `*analyst`, or `#bmad-orchestrator`
    - Upload BMAD team files from `./dist/teams/team-fullstack.txt` for full integration
 
-7. **Optional - Set up Usage Monitoring**:
+8. **Optional - Set up Usage Monitoring**:
    ```bash
    # Install monitoring tools (recommended for cost tracking)
    curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -161,7 +168,7 @@ To forward ports from the container to your local machine:
    ```
 2. Or forward manually: Press `F1` → `Forward a Port`
 
-## Additional Setup
+## Claude Code Integration
 
 ### Claude Code
 
@@ -184,24 +191,21 @@ Configure GitHub CLI (if not already configured):
 gh auth login
 ```
 
-#### Authenticate to github
-Follow the prompts to authenticate with your GitHub account.
-```bash
-https://github.com/login/device
-```
-Paste code there (XXXX-XXXX)
+#### Authenticate to GitHub
+Follow the prompts to authenticate with your GitHub account:
+1. Go to the provided URL: `https://github.com/login/device`
+2. Paste the authentication code (XXXX-XXXX)
 
-
-### Initialize github app
+#### Initialize GitHub App
 ```bash
 claude
 /install-github-app
 ```
 And Follow the installation path
 
-*** NOTE: Browser links might not work for authentication calls through host OS and non-default browsers do prepare to copy & paste in those stages ***
-For more information or Troubleshooting this phase please refer
-https://github.com/anthropics/claude-code-action/blob/main/docs/setup.md
+⚠️ **Authentication Note**: Browser links might not work for authentication calls through host OS and non-default browsers. Be prepared to copy & paste URLs during authentication stages.
+
+📖 **For detailed troubleshooting**: [Claude Code Action Setup Guide](https://github.com/anthropics/claude-code-action/blob/main/docs/setup.md)
 
 ### BMAD-Method Setup
 
@@ -214,6 +218,10 @@ npx bmad-method install
 
 # OR for stable version
 npx bmad-method@stable install
+
+# Important: Restart Claude Code after installation
+# Exit Claude Code (Ctrl+C or 'exit'), then restart:
+claude
 ```
 
 ##### Option 2: Clone and Install
@@ -222,6 +230,9 @@ npx bmad-method@stable install
 git clone https://github.com/bmadcode/bmad-method.git
 cd bmad-method
 npm run install:bmad
+
+# Important: Restart Claude Code after installation
+claude
 ```
 
 ##### Option 3: Update Existing Installation
@@ -229,6 +240,9 @@ npm run install:bmad
 # If BMAD-Method is already installed
 git pull
 npm run install:bmad
+
+# Important: Restart Claude Code after update
+claude
 ```
 
 #### Getting Started with BMAD
